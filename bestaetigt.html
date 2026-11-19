@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E-Mail bestätigt – MOTNODE</title>
+<style>
+body{margin:0;background:#0a0b0d;color:#f2f2f2;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:64px 20px;text-align:center}
+.logo{font-weight:800;letter-spacing:.12em;font-size:26px}.logo span{color:#ff6a00}
+.card{background:#15171b;border:1px solid #2a2d33;border-radius:14px;padding:24px;margin-top:28px}
+.err{display:none}.muted{color:#a7abb3}a{color:#a7abb3}
+</style></head>
+<body><main>
+<div class="logo">MOT<span>NODE</span></div>
+<div class="card ok" id="ok"><h1>Alles klar!</h1><p>Deine E-Mail-Adresse ist bestätigt. Öffne jetzt die MOTNODE-App und melde dich mit E-Mail und Passwort an.</p></div>
+<div class="card err" id="err"><h1>Link abgelaufen</h1><p class="muted">Dieser Bestätigungslink ist nicht mehr gültig. Registriere dich in der App erneut oder schreib an motnode@gmail.com.</p></div>
+<p class="muted" style="margin-top:32px"><a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a></p>
+</main>
+<script>
+// Supabase hängt bei Fehlern "#error=..." an die Adresse an
+if (location.hash.indexOf('error') !== -1 || location.search.indexOf('error') !== -1) {
+  document.getElementById('ok').style.display = 'none';
+  document.getElementById('err').style.display = 'block';
+}
+// Anmelde-Token aus der Adresse entfernen (die Web-Seite braucht sie nicht)
+if (location.hash.indexOf('access_token') !== -1) history.replaceState(null, '', location.pathname);
+</script>
+</body></html>
